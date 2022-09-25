@@ -58,7 +58,7 @@ variable "profiles" {
 }
 
 variable "smtp_alert_sender_address" {
-  default     = ""
+  default     = "ucs@example.com"
   description = "The email address entered here will be displayed as the from address (mail received from address) of all the SMTP mail alerts that are received. If not configured, the hostname of the server is used in the from address field."
   type        = string
 }

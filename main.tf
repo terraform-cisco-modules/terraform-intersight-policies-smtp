@@ -5,7 +5,12 @@
 #____________________________________________________________
 
 data "intersight_organization_organization" "org_moid" {
-  name = var.organization
+  for_each = {
+    for v in [var.organization] : v => v if length(
+      regexall("[[:xdigit:]]{24}", var.organization)
+    ) == 0
+  }
+  name = each.value
 }
 
 #____________________________________________________________
@@ -46,14 +51,16 @@ resource "intersight_smtp_policy" "smtp" {
   enabled         = var.enable_smtp
   min_severity    = var.minimum_severity
   name            = var.name
-  sender_email    = length(
-    compact([var.smtp_alert_sender_address])
-  ) > 0 ? var.smtp_alert_sender_address : var.smtp_server_address
+  sender_email    = var.smtp_alert_sender_address
   smtp_port       = var.smtp_port
   smtp_recipients = var.mail_alert_recipients
   smtp_server     = var.smtp_server_address
   organization {
-    moid        = data.intersight_organization_organization.org_moid.results[0].moid
+    moid = length(
+      regexall("[[:xdigit:]]{24}", var.organization)
+      ) > 0 ? var.organization : data.intersight_organization_organization.org_moid[
+      var.organization].results[0
+    ].moid
     object_type = "organization.Organization"
   }
   dynamic "profiles" {
