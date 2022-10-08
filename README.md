@@ -111,9 +111,6 @@ export TF_VAR_secretkeyfile="<secret-key-file-location>"
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_apikey"></a> [apikey](#input\_apikey) | Intersight API Key. | `string` | n/a | yes |
-| <a name="input_endpoint"></a> [endpoint](#input\_endpoint) | Intersight URL. | `string` | `"https://intersight.com"` | no |
-| <a name="input_secretkey"></a> [secretkey](#input\_secretkey) | Intersight Secret Key. | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Description for the Policy. | `string` | `""` | no |
 | <a name="input_enable_smtp"></a> [enable\_smtp](#input\_enable\_smtp) | If enabled, controls the state of the SMTP client service on the managed device. | `bool` | `true` | no |
 | <a name="input_minimum_severity"></a> [minimum\_severity](#input\_minimum\_severity) | Minimum fault severity level to receive email notifications. Email notifications are sent for all faults whose severity is equal to or greater than the chosen level.<br>* critical - Minimum severity to report is critical.<br>* condition - Minimum severity to report is informational.<br>* warning - Minimum severity to report is warning.<br>* minor - Minimum severity to report is minor.<br>* major - Minimum severity to report is major. | `string` | `"critical"` | no |
